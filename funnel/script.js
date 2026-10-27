@@ -74,7 +74,7 @@
   document.querySelectorAll("a[href$='.html'], a[href*='.html?']").forEach(function (link) {
     var href = link.getAttribute("href");
     if (/^https?:/i.test(href)) return;
-    var url = new URL(withAttribution(href));
+    var url = new URL(withAttribution(href), window.location.href);
     // Keep the link relative so the funnel works from any folder or domain.
     link.setAttribute("href", url.pathname.split("/").pop() + url.search + url.hash);
   });
@@ -116,17 +116,17 @@
   });
 
   // ---------------------------------------------------------------------------
-  // 3. Sticky CTA: shows after the hero, hides while the form is on screen
+  // 3. Sticky CTA: visible from page load, steps aside only while the form
+  //    fields are on screen (so it never covers them on mobile)
   // ---------------------------------------------------------------------------
   var sticky = document.querySelector(".sticky-cta");
-  var hero = document.querySelector(".hero");
+  var formEmbed = document.querySelector(".form-embed");
 
-  if (sticky && hero && "IntersectionObserver" in window) {
-    var pastHero = false;
+  if (sticky) {
     var formVisible = false;
 
     function update() {
-      var show = pastHero && !formVisible;
+      var show = !formVisible;
       sticky.classList.toggle("is-visible", show);
       sticky.setAttribute("aria-hidden", show ? "false" : "true");
       sticky.querySelectorAll("a").forEach(function (a) {
@@ -134,16 +134,11 @@
       });
     }
 
-    new IntersectionObserver(function (entries) {
-      pastHero = !entries[0].isIntersecting;
-      update();
-    }).observe(hero);
-
-    if (form) {
+    if (formEmbed && "IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         formVisible = entries[0].isIntersecting;
         update();
-      }, { threshold: 0.15 }).observe(form);
+      }, { threshold: 0.3 }).observe(formEmbed);
     }
 
     update();
