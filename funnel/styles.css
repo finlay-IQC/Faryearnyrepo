@@ -2,10 +2,8 @@
    Faryearny Design & Build — paid traffic funnel
    Mobile-first (390px). Vanilla CSS, no framework.
 
-   BRAND COLOURS: the client site (faryearnybuildingservices.co.uk) could not
-   be fetched at build time. These tokens are a placeholder palette (charcoal,
-   warm stone, brass). Swap the values in :root once the client site has been
-   screenshotted — every colour on the funnel comes from these tokens.
+   BRAND COLOURS: taken from faryearnybuildingservices.co.uk (orange, white,
+   charcoal). Every colour on the funnel comes from these tokens.
    ========================================================================== */
 
 :root {
@@ -16,11 +14,11 @@
   --line: #e2dccf;         /* hairlines on light sections */
   --muted: #565c62;        /* secondary text on light */
   --muted-dark: #b9b4aa;   /* secondary text on dark */
-  --accent: #c39b5c;       /* brass — buttons + small highlights */
-  --accent-dark: #ab8549;  /* accent darkened ~10% for hover */
-  --on-accent: #16191c;    /* text on accent buttons */
+  --accent: #d4570f;       /* Faryearny orange — buttons + highlights */
+  --accent-dark: #bf4e0d;  /* accent darkened 10% for hover */
+  --on-accent: #ffffff;    /* text on accent buttons */
 
-  --font-head: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-head: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --gutter: 24px;
@@ -146,7 +144,7 @@ p { margin: 0; }
   color: var(--on-accent);
   font-family: var(--font-head);
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
@@ -191,21 +189,27 @@ p { margin: 0; }
 }
 
 .logo {
+  display: inline-block;
+  padding: 6px 0 0 10px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
   font-family: var(--font-head);
-  font-size: 17px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1.1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
   text-decoration: none;
 }
 .logo span {
   display: block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--accent);
 }
+.logo em { font-style: normal; color: var(--accent); }
 
 .topbar__phone {
   font-weight: 700;
@@ -634,7 +638,12 @@ p { margin: 0; }
   font-size: 22px;
   line-height: 1.35;
 }
-.quote-tile cite { display: block; margin-top: 10px; font-style: normal; font-size: 15px; color: var(--accent); }
+.quote-tile cite { display: block; margin-top: 10px; font-style: normal; font-size: 15px; color: rgba(255, 255, 255, 0.82); }
+.quote-tile .stars { display: block; margin-bottom: 10px; color: var(--accent); letter-spacing: 0.15em; }
+
+@media (min-width: 900px) {
+  .quote-tile blockquote { font-size: 26px; max-width: 760px; }
+}
 
 .gallery-cta {
   padding: 48px var(--gutter) var(--section-y);
